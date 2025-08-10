@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulado ACCESS – Português (40 questões)</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#1a0f1c;
+  --bg2:#240b36;
+  --card:#2d1433;
+  --accent:#ff7eb6;
+  --accent-2:#c8f7dc;
+  --text:#ffeef7;
+  --muted:#f0cfe0;
+  --danger:#ff6b8a;
+  --ring:rgba(255,126,182,.16)
+}
+body{margin:0;background:linear-gradient(120deg,var(--bg) 0%,var(--bg2) 100%);
+  color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;display:flex;flex-direction:column;min-height:100vh}
+.container{max-width:920px;margin:28px auto;padding:0 16px;width:100%}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#ff9cc9,#ff6da8);
+  box-shadow:0 4px 16px rgba(255,126,182,.35)}
+.brand .name{font-weight:800;letter-spacing:.2px}
+.badge{font-size:.82rem;color:#2d1433;background:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700}
+.progress{color:var(--muted);font-weight:700}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;margin-top:18px;
+  box-shadow:0 12px 34px rgba(0,0,0,.35)}
+.hidden{display:none}
+.context{font-size:.95rem;color:var(--muted);background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.15);
+  padding:12px;border-radius:12px;margin-bottom:10px}
+.question{font-size:1.15rem;line-height:1.55rem;margin:12px 0 16px}
+.choices{display:grid;grid-template-columns:1fr;gap:10px}
+.choice{display:flex;gap:12px;align-items:flex-start;background:var(--card);
+  border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;cursor:pointer;
+  transition:transform .06s ease,border-color .2s ease,box-shadow .2s ease}
+.choice input{display:none}
+.choice .letter{min-width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-weight:800;background:rgba(255,126,182,.18);border:1px solid rgba(255,126,182,.45);color:var(--accent)}
+.choice .text{color:var(--text)}
+.choice:hover{transform:translateY(-1px)}
+.choice.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring) inset}
+.choice.correct{border-color:#4cd29e;box-shadow:0 0 0 4px rgba(76,210,158,.18) inset}
+.choice.wrong{border-color:var(--danger);box-shadow:0 0 0 4px rgba(255,107,138,.18) inset}
+.actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn{background:transparent;color:var(--text);
+  border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:10px 14px;font-weight:700}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#2d1433}
+.btn.ghost{border-style:dashed}
+.btn:disabled{opacity:.55}
+.footer{margin:22px 0 30px;text-align:center;color:var(--muted)}
+.footer small{opacity:.9}
+.brandmark{opacity:.75}
+@media (min-width:760px){.choices{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div class="name">Simulado ACCESS – Português</div>
+        <span class="badge">@balbinok</span>
+      </div>
+      <div id="progress" class="progress">—</div>
+    </header>
+
+    <section id="quizCard" class="card">
+      <div id="context" class="context"></div>
+      <div id="question" class="question">Carregando...</div>
+      <div id="choices" class="choices"></div>
+      <div class="actions">
+        <button id="btnVerify" class="btn primary">Verificar</button>
+        <button id="btnNext" class="btn">Próxima</button>
+        <button id="btnSkip" class="btn ghost">Pular</button>
+        <button id="btnRestartTop" class="btn ghost">Reiniciar</button>
+      </div>
+    </section>
+
+    <section id="resultCard" class="card hidden">
+      <h2>Resultado</h2>
+      <p id="resultText"></p>
+      <div class="actions">
+        <button id="btnRestart" class="btn primary">Reiniciar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small class="brandmark">Feito para estudo • Estilo ACCESS • <b>@balbinokdiupe</b></small>
+  </footer>
+
+<script>
+const QUESTOES = [
+  { t:"Leia: 'Eu <b>trouxe</b> o caderno.'",
+    q:"A grafia correta do verbo é:",
+    a:["trouse","trousee","trouxe","trousem"], g:"C" },
+  { t:"Placa: 'É <b>proibido</b> fumar aqui.'",
+    q:"Assinale a grafia correta:",
+    a:["proibído","proíbido","proibido","proibidoo"], g:"C" },
+  { t:"Frase: 'Ela tomou um <b>chá</b> bem quente.'",
+    q:"Complete corretamente: ____á",
+    a:["X","Ch","S","Z"], g:"B" },
+  { t:"Cartaz: 'Entrada pela <b>seção</b> B.'",
+    q:"Assinale o uso correto entre 'seção', 'sessão' e 'cessão':",
+    a:["sessão B","seção B","cessão B","seçãoo B"], g:"B" },
+  { t:"Bilhete: 'Volto às 18h, <b>ok</b>?'",
+    q:"Quanto à pontuação, a frase correta é:",
+    a:["Volto às 18h ok.","Volto às 18h, ok?","Volto às, 18h ok?","Volto às 18h ok?"], g:"B" },
+  { t:"Anúncio: 'Promoção de <b>pão</b> amanhã.'",
+    q:"Assinale a palavra corretamente acentuada:",
+    a:["pao","pão","pâo","páo"], g:"B" },
+  { t:"Trecho: 'Os meninos <b>correram</b> para a quadra.'",
+    q:"Classifique 'correram':",
+    a:["substantivo","verbo","adjetivo","advérbio"], g:"B" },
+  { t:"Aviso: 'Favor manter a <b>porta</b> fechada.'",
+    q:"O termo 'porta' é:",
+    a:["verbo","adjetivo","advérbio","substantivo"], g:"D" },
+  { t:"Frase: 'Ele é muito <b>rápido</b>.'",
+    q:"Antônimo de 'rápido':",
+    a:["Veloz","Apressado","Lento","Ágil"], g:"C" },
+  { t:"Frase: 'Estou <b>contente</b> com o resultado.'",
+    q:"Sinônimo de 'contente':",
+    a:["Feliz","Triste","Zangado","Cansado"], g:"A" },
+  { t:"Texto: 'Se <b>chover</b>, ficaremos em casa.'",
+    q:"Quanto à vírgula, assinale a correta:",
+    a:["Se chover ficaremos em casa.","Se, chover ficaremos em casa.","Se chover, ficaremos em casa.","Se chover ficaremos, em casa."], g:"C" },
+  { t:"Placa: 'Uso <b>obrigatório</b> de máscara.'",
+    q:"Acentuação correta é:",
+    a:["obrigatório","obrigatorio","obrigátorio","obrígatorio"], g:"A" },
+  { t:"Bilhete: '<b>Porque</b> você faltou?'",
+    q:"Assinale a forma correta para pergunta:",
+    a:["Porque você faltou?","Por quê você faltou?","Por que você faltou?","Porquê você faltou?"], g:"C" },
+  { t:"Frase: 'Cheguei <b>há</b> pouco.'",
+    q:"O uso correto de 'há/a' é:",
+    a:["Cheguei a pouco.","Cheguei há pouco.","Cheguei há à pouco.","Cheguei a há pouco."], g:"B" },
+  { t:"Diálogo: 'Você <b>vem</b> amanhã?'",
+    q:"Concordância adequada:",
+    a:["Você vêm amanhã?","Você vem amanhã?","Vocês vem amanhã?","Tu vem amanhã?"], g:"B" },
+  { t:"Mensagem: 'A <b>lâmpada</b> queimou.'",
+    q:"A alternativa correta é:",
+    a:["lâmpada","lampada","lâmpadao","lâmpa da"], g:"A" },
+  { t:"Frase: 'Gosto de <b>maçã</b> verde.'",
+    q:"Ortografia correta:",
+    a:["maça","maçã","maca","maçà"], g:"B" },
+  { t:"Cartaz: 'Não <b>jogue</b> lixo no chão.'",
+    q:"Classe gramatical de 'não':",
+    a:["verbo","advérbio","adjetivo","preposição"], g:"B" },
+  { t:"Texto: 'Ele <b>pôs</b> o livro na mesa.'",
+    q:"A forma correta do verbo pôr no passado (3ª pessoa) é:",
+    a:["pos","pôs","puz","puzs"], g:"B" },
+  { t:"Frase: 'A <b>sessão</b> de cinema começa às 20h.'",
+    q:"Assinale a opção correta:",
+    a:["sessão (exibição)","seção (exibição)","cessão (exibição)","seçãoo (exibição)"], g:"A" },
+  { t:"Bilhete: 'Estou <b>à</b> disposição.'",
+    q:"Uso do acento indicativo de crase:",
+    a:["Correto em 'à disposição'","Incorreto; deveria ser 'a disposição'","Sempre opcional","Só em plural"], g:"A" },
+  { t:"Aviso: 'Proibido <b>estacionar</b>.'",
+    q:"Parônimo correto:",
+    a:["acento/assento – 'Sentei no acento'","acento/assento – 'Sentei no assento'","assento/assento – 'Sentei no acento'","acento/acento – 'Sentei no assento'"], g:"B" },
+  { t:"Trecho: 'Ela falou <b>baixinho</b>.'",
+    q:"'Baixinho' é:",
+    a:["adjetivo","substantivo","advérbio de modo","preposição"], g:"C" },
+  { t:"Frase: 'Esta é a <b>melhor</b> opção.'",
+    q:"Grau do adjetivo 'boa' na frase:",
+    a:["comparativo de igualdade","comparativo de superioridade","superlativo absoluto","superlativo relativo de superioridade"], g:"D" },
+  { t:"Texto: 'As crianças <b>brincam</b> no pátio.'",
+    q:"Tempo verbal de 'brincam':",
+    a:["pretérito perfeito","presente do indicativo","futuro do presente","pretérito imperfeito"], g:"B" },
+  { t:"Frase: 'Ele é <b>mau</b> motorista.'",
+    q:"Complete corretamente: 'Ele dirige ____.'",
+    a:["mal","mau","maus","mál"], g:"A" },
+  { t:"Cartaz: 'Entrada <b>gratuita</b>.'",
+    q:"Sinônimo de 'gratuita':",
+    a:["paga","livre","sem custo","cara"], g:"C" },
+  { t:"Trecho: 'O <b>herói</b> salvou todos.'",
+    q:"Acentuação correta do ditongo/hiato:",
+    a:["heroi","herói","héroi","heroí"], g:"B" },
+  { t:"Frase: 'Havia <b>muitas</b> pessoas.'",
+    q:"Concordância correta com 'haver' no sentido de existir:",
+    a:["haviam muitas","havia muitas","houveram muitas","hão muitas"], g:"B" },
+  { t:"Texto: 'Ele <b>pára</b> o carro.' (nova ortografia)",
+    q:"Segundo o Acordo Ortográfico (2009), a forma correta é:",
+    a:["pára","para","pára (facultativo)","pára/para (ambos)"], g:"B" },
+  { t:"Bilhete: 'Comprei <b>quatro</b> pães.'",
+    q:"Classificação de 'quatro':",
+    a:["numeral","adjetivo","substantivo","advérbio"], g:"A" },
+  { t:"Frase: 'Ele <b>assistiu</b> ao jogo.'",
+    q:"Regência verbal correta:",
+    a:["assistiu o jogo","assistiu ao jogo","assistiu no jogo","assistiu do jogo"], g:"B" },
+  { t:"Placa: 'Não <b>ultrapasse</b> a faixa.'",
+    q:"Ortografia correta:",
+    a:["ultrapace","ultrapasse","ultrapaçe","ultrapasseh"], g:"B" },
+  { t:"Trecho: 'Ela é muito <b>humilde</b>.'",
+    q:"Ortografia:",
+    a:["umilde","humílde","humilde","húmilde"], g:"C" },
+  { t:"Frase: 'Ele <b>consertou</b> o relógio.'",
+    q:"Parônimo correto (conserto/concerto):",
+    a:["concerto (arrumar)","conserto (arrumar)","concerto (música) = arrumar","conserto (música)"], g:"B" },
+  { t:"Aviso: 'Favor <b>desligar</b> o celular.'",
+    q:"A forma derivada com prefixo está correta em:",
+    a:["des ligar","desligar","des-ligar","desli gar"], g:"B" },
+  { t:"Texto: 'Maria e Ana <b>chegaram</b> cedo.'",
+    q:"Concordância verbal:",
+    a:["chegou cedo","chegaram cedo","chegastes cedo","chegará cedo"], g:"B" },
+  { t:"Frase: 'Ele <b>tem</b> duas canetas.'",
+    q:"No plural, a forma correta é:",
+    a:["eles tem","eles têm","eles tém","eles têem"], g:"B" },
+  { t:"Placa: 'Área <b>reservada</b>.'",
+    q:"Grafia correta do particípio:",
+    a:["resérvada","reservada","reservadda","resservada"], g:"B" },
+  { t:"Trecho: 'O aluno faltou <b>porque</b> estava doente.'",
+    q:"Uso adequado de por que/porque/por quê/porquê:",
+    a:["porque (explicação) – correto","por que (explicação) – correto","por quê (meio da frase) – correto","porquê (conjunção) – correto"], g:"A" },
+  { t:"Frase: 'Embora cansado, ele <b>estudou</b>.'",
+    q:"'Embora' indica relação de:",
+    a:["causa","condição","concessão","tempo"], g:"C" }
+];
+
+const $ = (s)=>document.querySelector(s);
+const quizCard   = $("#quizCard");
+const resultCard = $("#resultCard");
+const contextEl  = $("#context");
+const questionEl = $("#question");
+const choicesEl  = $("#choices");
+const progressEl = $("#progress");
+const btnVerify  = $("#btnVerify");
+const btnNext    = $("#btnNext");
+const btnRestart = $("#btnRestart");
+const btnRestartTop = $("#btnRestartTop");
+
+let idx = 0, selecionada = null, acertos = 0;
+const letra = (i)=> String.fromCharCode(65+i);
+
+function render(){
+  const total = QUESTOES.length;
+  progressEl.textContent = `${idx+1} / ${total}`;
+  const atual = QUESTOES[idx];
+  contextEl.innerHTML = atual.t;
+  questionEl.innerHTML = atual.q;
+
+  choicesEl.innerHTML = "";
+  selecionada = null;
+  btnVerify.disabled = false;
+
+  atual.a.forEach((texto,i)=>{
+    const L = letra(i);
+    const wrap = document.createElement("label");
+    wrap.className = "choice";
+    wrap.innerHTML = `
+      <input type="radio" name="opt" value="${L}">
+      <div class="letter">${L}</div>
+      <div class="text">${texto}</div>`;
+    wrap.addEventListener("click", ()=>{
+      document.querySelectorAll(".choice").forEach(c=>c.classList.remove("selected"));
+      wrap.classList.add("selected");
+      selecionada = L;
+    });
+    choicesEl.appendChild(wrap);
+  });
+  btnNext.disabled = true;
+}
+
+function verificar(){
+  if(!selecionada){ alert("Escolha uma alternativa."); return; }
+  const g = QUESTOES[idx].g;
+  document.querySelectorAll(".choice").forEach((node,i)=>{
+    const L = letra(i);
+    if(L===g) node.classList.add("correct");
+    if(L===selecionada && L!==g) node.classList.add("wrong");
+  });
+  if(selecionada===g) acertos++;
+  btnVerify.disabled = true;
+  btnNext.disabled = false;
+}
+
+function proxima(){
+  idx++;
+  if(idx >= QUESTOES.length) return finalizar();
+  render();
+}
+
+function finalizar(){
+  quizCard.classList.add("hidden");
+  resultCard.classList.remove("hidden");
+  const pct = Math.round((acertos/QUESTOES.length)*100);
+  document.querySelector("#resultText").innerHTML = 
+    `Você acertou <b>${acertos}</b> de <b>${QUESTOES.length}</b> (${pct}%).<br>
+     <b>@balbinokdiupe</b>`;
+}
+
+function reiniciar(){
+  idx = 0; acertos = 0;
+  resultCard.classList.add("hidden");
+  quizCard.classList.remove("hidden");
+  render();
+}
+
+btnVerify.addEventListener("click", verificar);
+btnNext.addEventListener("click", proxima);
+btnRestart?.addEventListener("click", reiniciar);
+btnRestartTop?.addEventListener("click", reiniciar);
+const btnSkip = document.querySelector("#btnSkip");
+btnSkip?.addEventListener("click", ()=>{
+  idx++;
+  if(idx >= QUESTOES.length) return finalizar();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

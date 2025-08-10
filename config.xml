@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.balbinok.simulado" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Simulado ACCESS</name>
+  <description>Simulado Português – @balbinokdiupe</description>
+  <author email="you@example.com" href="https://example.com">@balbinokdiupe</author>
+  <content src="index.html" />
+  <preference name="Orientation" value="portrait" />
+  <preference name="SplashScreenDelay" value="0" />
+  <preference name="BackgroundColor" value="#2d1433" />
+  <allow-intent href="*" />
+  <access origin="*" />
+</widget>
