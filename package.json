@@ -1,0 +1,20 @@
+{
+  "name": "simulado-bancaaccess",
+  "version": "1.0.0",
+  "description": "Aplicativo Cordova Simulado Banca ACCESS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "keywords": [
+    "cordova",
+    "simulado",
+    "banca",
+    "access"
+  ],
+  "author": "balbinokdiupe",
+  "license": "ISC",
+  "dependencies": {
+    "cordova": "^12.0.0"
+  }
+}
